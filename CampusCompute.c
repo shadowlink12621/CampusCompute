@@ -475,7 +475,7 @@ static void limit_demo(void) {
     if (!p) {   /* limit is set only in the child, so the parent is unaffected */
         if (setrlimit(RLIMIT_CPU, &lim) < 0) { perror("setrlimit"); _exit(2); }
         volatile unsigned long x = 0;
-        for (;;) x++;                                         /* burn CPU until the kernel sends SIGXCPU */
+        for (;;) { x++; if (x == ULONG_MAX) x = 0; }                                         /* burn CPU until the kernel sends SIGXCPU */
     }
     int st;
     waitpid(p, &st, 0);
