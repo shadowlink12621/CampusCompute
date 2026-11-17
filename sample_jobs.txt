@@ -1,0 +1,5 @@
+# id arrival burst priority   (lower priority number = more urgent)
+1 0 7 2
+2 2 4 1
+3 4 1 3
+4 5 4 2

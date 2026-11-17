@@ -1,79 +1,65 @@
 # CampusCompute Team Plan
 
 **Course:** Operating Systems (UE25CS242A), Level 3 Mini-Project  
-**Project:** CampusCompute: Intelligent Job Scheduling and Resource Management  
 **Team:** Sridatta and Saideep  
-**Target:** Finish the implementation checks and submission evidence today.
+**Target:** Finish the Linux verification and submission evidence today.
 
-## Work completed
+## Current project state
 
-- Read the two supplied assignment PDFs and identified the required features and S01–S24 evidence checklist.
-- Implemented the CampusCompute C command-line program: FCFS, Round Robin, non-preemptive Priority, producer-consumer logging, shared-memory IPC with a named semaphore, Banker's safe/unsafe analysis, worker exit-status reporting, CPU resource limit, cleanup checks, and command help.
-- Added a Linux Makefile, .gitignore, README with build/run commands and the screenshot checklist, and a source ZIP.
-- Created the public GitHub repository: https://github.com/shadowlink12621/CampusCompute.
-- Added CampusCompute.c, Makefile, and .gitignore to the repository. This team plan is being added now.
+- The supplied updated archive has been unpacked into this project folder. It includes `CampusCompute.c`, `Makefile`, `README.md`, `sample_jobs.txt`, and `bad_jobs.txt`.
+- The updated implementation is reported as compiled and tested by the person who prepared the archive. Both teammates still need to build and run it in the Linux VM and use their actual output for evidence.
+- The code covers the required schedulers (FCFS, Round Robin, Priority), input validation, pthread bounded-queue logger, shared-memory/semaphore IPC, Banker's safe/unsafe cases, worker exit-status reporting, CPU resource limit, cleanup, CLI, and integrated run.
+- The assignment PDFs require genuine terminal screenshots S01-S24 with the submitting student's complete SRN visible, one explanatory sentence per screenshot, and one screenshot PDF named with that student's SRN. Do not fabricate or edit terminal evidence. A separate report is not required.
+- A viva study PDF is separate optional preparation material; it does not replace the required screenshot PDF.
 
-## Ownership for the remaining work
+## Ownership for today's work
 
-### Sridatta — scheduling, CLI, integration, and evidence assembly
+### Sridatta — build, scheduling, and submission assembly
 
-- On the Linux VM, clone the repository and build with make clean && make.
-- Verify --help, FCFS, Round Robin (quantum 3), Priority (lower number wins), policy comparison, malformed command handling, and reported metrics.
-- Check that jobs finish and that the same workload is used for policy comparison.
-- Capture S01–S09 and S19, showing the complete real SRN in the terminal prompt.
-- Collect both teammates' screenshots and combine the genuine screenshots and one-line captions into the single SRN-named PDF.
-- Prepare the final source/build ZIP and verify its contents and integrity (S24).
+1. Clone/pull the public repository in the Linux VM; check that `sample_jobs.txt` and `bad_jobs.txt` are present.
+2. Run `make clean && make`; resolve any Linux-specific build issues with Saideep before screenshots.
+3. Run and verify `help`, FCFS, Round Robin, Priority, `compare`, and invalid command/input behavior. Confirm metrics from actual output rather than relying only on expected values.
+4. Capture S01-S09 and S19 with the complete real SRN prompt. S03 should show files before build; S23 should show the final files and executable.
+5. Collect Saideep's screenshots, add one-line captions, assemble the required SRN-named evidence PDF, and prepare/check the final source ZIP for submission.
 
-### Saideep — concurrency, IPC, safety, workers, and resource limit
+### Saideep — concurrency, IPC, resource safety, and process checks
 
-- Independently review and run the producer-consumer logger; confirm both producers' events are processed, threads join, and campuscompute.log is readable.
-- Run shared-memory IPC and confirm the child-to-parent message uses the named semaphore and resources are cleaned up.
-- Run Banker's safe and unsafe cases and verify the reported safe sequence and unsafe result.
-- Run normal and simulated-failure workers; confirm the parent reaps both and reports their statuses accurately.
-- Run the CPU resource-limit demonstration and cleanup check; note the observed signal/status on this Linux VM.
-- Capture S10–S18 and S22, showing the complete real SRN in the terminal prompt.
+1. Independently inspect the scheduling results and review the changed code with Sridatta.
+2. Run the logger twice as needed; verify the bounded queue behavior, log file, and joined threads.
+3. Run IPC and verify the shared-memory message, semaphore coordination, and that only CampusCompute's named resources are cleaned.
+4. Run Banker's safe and unsafe cases; verify normal and simulated-failure workers; run the CPU-limit demonstration and cleanup checks.
+5. Capture S10-S18 and S20-S22 with the complete real SRN prompt. For S22, show the generated log file and a sample.
+6. Send original screenshots and observed output notes to Sridatta; do not alter screenshots.
 
-## Shared tasks to finish today
+## Shared final checks
 
-1. **Coordinate the VM and repository.** Sridatta adds Saideep as a GitHub collaborator; Saideep accepts the invitation and clones the repo. Keep the local project folder as a fallback if access takes time.
-2. **Build and verify first.** Run make clean && make, then each assigned command from the README. Fix any actual compiler/runtime defects and push the fixes before capturing final evidence.
-3. **Capture genuine screenshots.** Both teammates use their own full SRN in their terminal prompt and capture only real output. Number screenshots once, S01–S24, and write one short explanation per screenshot. Do not edit/fabricate terminal evidence.
-4. **Integrated run and final review.** Together run ./campuscompute all, inspect the generated log, run ./campuscompute cleanup, review all screenshots, and ensure no assigned feature is missing.
-5. **Package submission.** Make one PDF named exactly with the submitting student's SRN, containing the numbered screenshots and captions. Make a ZIP with source/build files if the portal requires it, then check archive integrity. Do not create a separate report unless the instructor/portal asks for one.
-6. **Viva preparation.** Each teammate explains their assigned areas and both review the full program together: scheduling metrics, synchronization, shared memory/semaphore, Banker's Need calculation, worker status, and resource limits.
+- Both teammates independently run `./campuscompute all` (capture the beginning/end as required for S21) and explain the output to each other.
+- Each teammate should be ready to explain every module, not only their assigned tasks. Rehearse adding a job to a copied job file, changing the RR quantum at runtime, changing a priority, and explaining the resulting output.
+- Live-demo commands: `./campuscompute rr 3 sample_jobs.txt`, `./campuscompute rr 2 sample_jobs.txt`, and `./campuscompute compare sample_jobs.txt`.
+- To add a live job without changing the checked-in sample, copy `sample_jobs.txt` to `live_jobs.txt`, append a valid record such as `5 7 3 1`, then run FCFS/compare with that file.
+- Confirm S01-S24 are all present once, readable, genuine, and captioned. S24 should show archive listing and a successful integrity check.
+- Ensure `make clean` is run before creating the submission ZIP if the instructor expects source/build files without generated binary/log output.
+- Both teammates review the final evidence PDF and ZIP. One designated teammate submits the team's copy; both retain a copy and prepare for viva.
 
-## Evidence checklist
+## Status checklist
 
-- [ ] S01 Ubuntu/WSL, full SRN prompt, working directory
-- [ ] S02 GCC and Make versions
-- [ ] S03 project files and Makefile
-- [ ] S04 clean build
-- [ ] S05 command help
-- [ ] S06 FCFS metrics
-- [ ] S07 Round Robin, quantum, and metrics
-- [ ] S08 Priority scheduling and tie-breaking
-- [ ] S09 policy comparison on the same jobs
-- [ ] S10 producer-consumer activity and log
-- [ ] S11 synchronized thread completion
-- [ ] S12 shared-memory message exchange
-- [ ] S13 semaphore coordination and IPC cleanup
-- [ ] S14 Banker's safe state and sequence
-- [ ] S15 Banker's unsafe state
-- [ ] S16 normal worker completion
-- [ ] S17 controlled simulated worker failure
-- [ ] S18 CPU resource limit and observed result
-- [ ] S19 invalid command and useful usage message
-- [ ] S20 cleanup verification
-- [ ] S21 integrated execution and summary
-- [ ] S22 generated log sample
-- [ ] S23 final source, Makefile, and executable
-- [ ] S24 source ZIP listing and successful integrity check
-- [ ] One PDF named with the submitter's actual SRN; all screenshots have one-line captions
-- [ ] Submission ZIP prepared if required by the portal
+- [x] Read the assignment and identify required features and evidence.
+- [x] Prepare the updated source, Makefile, README, and job-file examples.
+- [x] Team plan is published in the public GitHub repository.
+- [ ] Replace the older source/README in GitHub with this updated package and add `sample_jobs.txt` and `bad_jobs.txt`; verify the files are visible.
+- [ ] Build the repository version in Linux and resolve any discrepancies.
+- [ ] Run every required command and capture authentic S01-S24 evidence.
+- [ ] Assemble, inspect, and name the screenshot PDF using the submitting student's actual SRN.
+- [ ] Create and integrity-check the final submission ZIP.
+- [ ] Both teammates rehearse the viva using the implementation and their own outputs.
 
-## Notes
+## Linux quick start
 
-- GitHub is a collaboration/download convenience, not a course submission requirement.
-- The source is implemented, but it has not yet been built or run on the target Linux VM. Treat all demonstrations as PENDING VERIFICATION until the team observes them there.
-- The final SRN-named PDF cannot be completed until the team captures the required genuine screenshots. Do not invent SRNs or screenshots.
-- Only Sridatta is handling the GitHub collaborator invitation; no repository permissions are changed by this plan.
+```sh
+git clone https://github.com/shadowlink12621/CampusCompute.git
+cd CampusCompute
+make clean && make
+./campuscompute --help
+```
+
+Before screenshots, set the terminal prompt with the student's own full SRN as directed in `README.md`. The exact output and observed Linux behavior are the evidence of record.

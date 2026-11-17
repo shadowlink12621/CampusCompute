@@ -1,4 +1,7 @@
 campuscompute
 campuscompute.log
+live_jobs.txt
 *.zip
+!CampusCompute.zip
 *.pdf
+!CampusCompute_Viva_QnA.pdf
