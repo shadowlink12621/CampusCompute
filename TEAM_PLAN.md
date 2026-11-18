@@ -1,65 +1,63 @@
 # CampusCompute Team Plan
 
 **Course:** Operating Systems (UE25CS242A), Level 3 Mini-Project  
-**Team:** Sridatta and Saideep  
-**Target:** Finish the Linux verification and submission evidence today.
+**Team:** Sridatta and Saideep (exactly two students)
 
-## Current project state
+## Current version
 
-- The supplied updated archive has been unpacked into this project folder. It includes `CampusCompute.c`, `Makefile`, `README.md`, `sample_jobs.txt`, and `bad_jobs.txt`.
-- The updated implementation is reported as compiled and tested by the person who prepared the archive. Both teammates still need to build and run it in the Linux VM and use their actual output for evidence.
-- The code covers the required schedulers (FCFS, Round Robin, Priority), input validation, pthread bounded-queue logger, shared-memory/semaphore IPC, Banker's safe/unsafe cases, worker exit-status reporting, CPU resource limit, cleanup, CLI, and integrated run.
-- The assignment PDFs require genuine terminal screenshots S01-S24 with the submitting student's complete SRN visible, one explanatory sentence per screenshot, and one screenshot PDF named with that student's SRN. Do not fabricate or edit terminal evidence. A separate report is not required.
-- A viva study PDF is separate optional preparation material; it does not replace the required screenshot PDF.
+The submission copy is a single-file C implementation in `CampusCompute.c`, built by the Makefile. It accepts job input files, validates records, implements FCFS/Round Robin/non-preemptive Priority, and includes the bounded logger, shared-memory/semaphore IPC, Banker's safety check, worker status checks, CPU limit, cleanup, and integrated `all` command. `sample_jobs.txt` is valid input; `bad_jobs.txt` is a deliberate validation case.
 
-## Ownership for today's work
+The code has been rebuilt and all documented feature paths have been run in the local Linux environment. Each teammate must rebuild and confirm behavior on their own Linux system; their own terminal output is the source for screenshots and any platform-specific observations.
 
-### Sridatta — build, scheduling, and submission assembly
+## Work split
 
-1. Clone/pull the public repository in the Linux VM; check that `sample_jobs.txt` and `bad_jobs.txt` are present.
-2. Run `make clean && make`; resolve any Linux-specific build issues with Saideep before screenshots.
-3. Run and verify `help`, FCFS, Round Robin, Priority, `compare`, and invalid command/input behavior. Confirm metrics from actual output rather than relying only on expected values.
-4. Capture S01-S09 and S19 with the complete real SRN prompt. S03 should show files before build; S23 should show the final files and executable.
-5. Collect Saideep's screenshots, add one-line captions, assemble the required SRN-named evidence PDF, and prepare/check the final source ZIP for submission.
+### Sridatta: scheduling, build, and evidence assembly
 
-### Saideep — concurrency, IPC, resource safety, and process checks
+- Build from a clean state and verify GCC/Make, CLI help, FCFS, both Round Robin quanta, Priority, comparison, and invalid input.
+- Rehearse creating a three-job input file and running FCFS. Rehearse adding a job and changing a priority in a working copy.
+- Capture genuine S01-S09 and S19 screenshots with the submitting student's complete actual SRN in the prompt.
+- Assemble the S01-S24 screenshot and caption evidence into the required SRN-named PDF. Check screenshot numbering, legibility, and filename.
 
-1. Independently inspect the scheduling results and review the changed code with Sridatta.
-2. Run the logger twice as needed; verify the bounded queue behavior, log file, and joined threads.
-3. Run IPC and verify the shared-memory message, semaphore coordination, and that only CampusCompute's named resources are cleaned.
-4. Run Banker's safe and unsafe cases; verify normal and simulated-failure workers; run the CPU-limit demonstration and cleanup checks.
-5. Capture S10-S18 and S20-S22 with the complete real SRN prompt. For S22, show the generated log file and a sample.
-6. Send original screenshots and observed output notes to Sridatta; do not alter screenshots.
+### Saideep: synchronization, IPC, and process/resource behavior
 
-## Shared final checks
+- Review and run the producer-consumer logger, generated log, shared-memory/semaphore exchange, and cleanup check.
+- Run both Banker's cases, both worker modes, CPU-limit demonstration, and integrated `all` run.
+- Capture genuine S10-S18 and S20-S22 screenshots with the team's submitter SRN visible if sharing evidence. Send original screenshots to Sridatta without editing terminal output.
 
-- Both teammates independently run `./campuscompute all` (capture the beginning/end as required for S21) and explain the output to each other.
-- Each teammate should be ready to explain every module, not only their assigned tasks. Rehearse adding a job to a copied job file, changing the RR quantum at runtime, changing a priority, and explaining the resulting output.
-- Live-demo commands: `./campuscompute rr 3 sample_jobs.txt`, `./campuscompute rr 2 sample_jobs.txt`, and `./campuscompute compare sample_jobs.txt`.
-- To add a live job without changing the checked-in sample, copy `sample_jobs.txt` to `live_jobs.txt`, append a valid record such as `5 7 3 1`, then run FCFS/compare with that file.
-- Confirm S01-S24 are all present once, readable, genuine, and captioned. S24 should show archive listing and a successful integrity check.
-- Ensure `make clean` is run before creating the submission ZIP if the instructor expects source/build files without generated binary/log output.
-- Both teammates review the final evidence PDF and ZIP. One designated teammate submits the team's copy; both retain a copy and prepare for viva.
+## Shared responsibilities and remaining work
 
-## Status checklist
+- Both teammates must understand the full implementation, including each other's assigned demonstrations, and practice the teacher's 25 viva questions and live coding tasks.
+- Both should independently rebuild and run the program. If their outputs or signal behavior differ from this environment, explain the results they observe on their own system.
+- Confirm with the instructor whether CachyOS terminal evidence is accepted because the assignment says Linux/Ubuntu or WSL Ubuntu and its screenshot checklist specifies Ubuntu/WSL.
+- Capture every required S01-S24 screenshot directly from the team's own terminal. Put one short explanation under each screenshot in a single PDF named exactly with the submitting student's full SRN. Do not fabricate screenshots or submit a separate report.
+- Check whether the course portal requires the source ZIP and follow its archive naming/upload rules. The README includes an S24 archive integrity command.
+- One teammate submits the team's copy; both retain it and prepare for the viva.
 
-- [x] Read the assignment and identify required features and evidence.
-- [x] Prepare the updated source, Makefile, README, and job-file examples.
-- [x] Team plan is published in the public GitHub repository.
-- [ ] Replace the older source/README in GitHub with this updated package and add `sample_jobs.txt` and `bad_jobs.txt`; verify the files are visible.
-- [ ] Build the repository version in Linux and resolve any discrepancies.
-- [ ] Run every required command and capture authentic S01-S24 evidence.
-- [ ] Assemble, inspect, and name the screenshot PDF using the submitting student's actual SRN.
-- [ ] Create and integrity-check the final submission ZIP.
-- [ ] Both teammates rehearse the viva using the implementation and their own outputs.
-
-## Linux quick start
+## Live-demonstration commands
 
 ```sh
-git clone https://github.com/shadowlink12621/CampusCompute.git
-cd CampusCompute
-make clean && make
-./campuscompute --help
+./campuscompute rr 3 sample_jobs.txt
+./campuscompute rr 2 sample_jobs.txt
+printf '1 0 5 2\n2 1 3 1\n3 2 2 3\n' > live_jobs.txt
+./campuscompute fcfs live_jobs.txt
+cp sample_jobs.txt live_jobs.txt
+printf '5 7 3 1\n' >> live_jobs.txt
+./campuscompute priority live_jobs.txt
+./campuscompute compare live_jobs.txt
+./campuscompute logger
+./campuscompute banker safe
+./campuscompute banker unsafe
+./campuscompute worker fail
 ```
 
-Before screenshots, set the terminal prompt with the student's own full SRN as directed in `README.md`. The exact output and observed Linux behavior are the evidence of record.
+## Checklist
+
+- [x] Read the assignment and identify all functional and screenshot requirements.
+- [x] Prepare the submission copy with job-file input and runtime Round Robin quantum.
+- [x] Update README and this plan to describe the exact submission code.
+- [x] Build with warning flags and run all documented feature paths locally.
+- [ ] Practice the teacher's viva questions together during the live review tomorrow.
+- [ ] Both teammates repeat the build and feature checks on their own system.
+- [ ] Capture genuine S01-S24 screenshots and assemble the required SRN-named evidence PDF.
+- [ ] Verify the source ZIP if required by the course portal.
+- [ ] Both teammates rehearse explaining and demonstrating all features.

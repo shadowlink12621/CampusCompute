@@ -6,11 +6,17 @@ LDLIBS ?= -pthread -lrt
 
 all: campuscompute
 
-campuscompute: CampusCompute.c
-	$(CC) $(CFLAGS) -o $@ $< $(LDLIBS)
+SOURCES = main.c scheduler.c logger.c ipc.c banker.c workers.c
+OBJECTS = $(SOURCES:.c=.o)
+
+campuscompute: $(OBJECTS)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDLIBS)
+
+%.o: %.c campuscompute.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 run: campuscompute
 	./campuscompute all
 
 clean:
-	rm -f campuscompute campuscompute.log
+	rm -f $(OBJECTS) campuscompute campuscompute.log
